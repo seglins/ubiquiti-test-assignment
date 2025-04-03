@@ -1,26 +1,83 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --container-width: 1440px;
+  --oklch-black: 0 0 0;
+  --neutral-0: #ffffff;
+  --neutral-2: #f6f6f8;
+  --neutral-3: #ededf0;
+  --neutral-6: #b6b9c4;
+  --neutral-8: #838691;
+  --web-unifi-color-neutral-00: #ffffff;
+  --web-unifi-color-neutral-01: #f9fafa;
+  --web-unifi-color-neutral-02: #f4f5f6;
+  --web-unifi-color-neutral-10: #50565e;
+  --web-unifi-text-1: #212327;
+  --web-unifi-text-2: #50565e;
+  --web-unifi-text-3: #808893;
+  --web-unifi-color-ublue-06: #006fff;
+  --web-unifi-color-ublue-07: #0059cc;
+  --web-unifi-color-red-03: #f9b0b2;
+  --web-unifi-color-red-06: #f03a3e;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-neutral-0: var(--neutral-0);
+  --color-neutral-2: var(--neutral-2);
+  --color-neutral-3: var(--neutral-3);
+  --color-neutral-6: var(--neutral-6);
+  --color-neutral-8: var(--neutral-8);
+  --color-text-1: oklch(var(--oklch-black) / 0.85);
+  --color-text-2: oklch(var(--oklch-black) / 0.65);
+  --color-text-3: oklch(var(--oklch-black) / 0.45);
+  --color-unifi-neutral-0: var(--web-unifi-color-neutral-00);
+  --color-unifi-neutral-1: var(--web-unifi-color-neutral-01);
+  --color-unifi-neutral-2: var(--web-unifi-color-neutral-02);
+  --color-unifi-neutral-10: var(--web-unifi-color-neutral-10);
+  --color-unifi-text-1: var(--web-unifi-text-1);
+  --color-unifi-text-2: var(--web-unifi-text-2);
+  --color-unifi-text-3: var(--web-unifi-text-3);
+  --color-primary-6: var(--web-unifi-color-ublue-06);
+  --color-primary-7: var(--web-unifi-color-ublue-07);
+  --color-destructive-3: var(--web-unifi-color-red-03);
+  --color-destructive-6: var(--web-unifi-color-red-06);
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-text-2);
+  --color-outline: var(--web-unifi-color-ublue-06);
+  --drop-shadow-button: 0 8px 24px oklch(var(--oklch-black) / 0.08);
+  --drop-shadow-button-border: 0 0 1px oklch(var(--oklch-black) / 0.06);
+  /* TODO: Replace font. */
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* TODO: Use semantic theme variables? */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  }
+}
+
+@utility container {
+  @apply px-4 mx-auto max-w-[var(--container-width)];
+
+  @variant md {
+    @apply px-8;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-background text-foreground font-sans text-sm;
+}
+
+:focus,
+:focus-visible {
+  @apply outline-1 outline-outline -outline-offset-1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-text-1;
 }
