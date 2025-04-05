@@ -68,7 +68,7 @@ body {
   @apply bg-background text-foreground font-sans text-sm;
 }
 
-:focus,
+.focus-outline:focus,
 :focus-visible {
   @apply outline-1 outline-outline -outline-offset-1;
 }
