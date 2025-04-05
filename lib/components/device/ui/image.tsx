@@ -2,11 +2,11 @@
 
 import Image, { type ImageProps } from "next/image";
 
-export interface ProductImageProps extends ImageProps {
+export interface DeviceImageProps extends ImageProps {
   id: string;
 }
 
-const ProductImage = ({ id, alt, ...props }: ProductImageProps) => (
+const DeviceImage = ({ id, alt, ...props }: DeviceImageProps) => (
   <Image
     {...props}
     alt={alt}
@@ -16,4 +16,4 @@ const ProductImage = ({ id, alt, ...props }: ProductImageProps) => (
   />
 );
 
-export default ProductImage;
+export default DeviceImage;

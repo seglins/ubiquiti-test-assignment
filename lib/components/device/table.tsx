@@ -1,13 +1,13 @@
 import { Device } from "@/lib/types";
 import Table from "../ui/table";
-import ProductImage from "./ui/image";
+import DeviceImage from "./ui/image";
 
-interface ProductTableProps {
+interface DeviceTableProps {
   devices: Device[];
   className?: string;
 }
 
-const ProductTable = ({ devices, className }: ProductTableProps) => {
+const DeviceTable = ({ devices, className }: DeviceTableProps) => {
   return (
     <Table
       className={className}
@@ -19,7 +19,7 @@ const ProductTable = ({ devices, className }: ProductTableProps) => {
       rows={devices.map((device) => ({
         href: `/device/${device.id}`,
         data: [
-          <ProductImage
+          <DeviceImage
             key={`${device.id}-image`}
             id={device.id}
             src={device.images.default}
@@ -37,4 +37,4 @@ const ProductTable = ({ devices, className }: ProductTableProps) => {
   );
 };
 
-export default ProductTable;
+export default DeviceTable;

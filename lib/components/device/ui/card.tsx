@@ -1,21 +1,21 @@
 import Link from "next/link";
-import ProductImage, { type ProductImageProps } from "./image";
+import DeviceImage, { type DeviceImageProps } from "./image";
 
-interface ProductCardProps {
+interface DeviceCardProps {
   href: string;
   title: string;
-  image: Omit<ProductImageProps, "width" | "height">;
+  image: Omit<DeviceImageProps, "width" | "height">;
   description?: string;
   badge?: string;
 }
 
-const ProductCard = ({
+const DeviceCard = ({
   href,
   title,
   image,
   description,
   badge,
-}: ProductCardProps) => {
+}: DeviceCardProps) => {
   return (
     <Link
       href={href}
@@ -27,7 +27,7 @@ const ProductCard = ({
             {badge}
           </span>
         )}
-        <ProductImage {...image} width={100} height={100} className="mx-auto" />
+        <DeviceImage {...image} width={100} height={100} className="mx-auto" />
       </div>
       <div className="flex flex-col h-full justify-between gap-y-2 p-2 bg-unifi-neutral-0 group-hover:bg-unifi-neutral-1 transition-colors">
         <h3 className="min-h-[calc(calc(var(--spacing)*10)-calc(var(--spacing)*2))]">
@@ -39,4 +39,4 @@ const ProductCard = ({
   );
 };
 
-export default ProductCard;
+export default DeviceCard;

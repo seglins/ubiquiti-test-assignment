@@ -1,13 +1,13 @@
 import cn from "classnames";
 import { Device } from "@/lib/types";
-import ProductCard from "./ui/card";
+import DeviceCard from "./ui/card";
 
-interface ProductGridProps {
+interface DeviceGridProps {
   devices: Device[];
   className?: string;
 }
 
-const ProductGrid = ({ devices, className }: ProductGridProps) => {
+const DeviceGrid = ({ devices, className }: DeviceGridProps) => {
   return (
     <div
       className={cn(
@@ -17,7 +17,7 @@ const ProductGrid = ({ devices, className }: ProductGridProps) => {
     >
       {devices.map((device) => {
         return (
-          <ProductCard
+          <DeviceCard
             key={device.id}
             href={`/device/${device.id}`}
             title={device.product.name}
@@ -35,4 +35,4 @@ const ProductGrid = ({ devices, className }: ProductGridProps) => {
   );
 };
 
-export default ProductGrid;
+export default DeviceGrid;
