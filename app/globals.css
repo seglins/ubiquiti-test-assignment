@@ -2,7 +2,10 @@
 
 :root {
   --container-width: 1440px;
+  --header-height: 50px;
+  --action-bar-height: 64px;
   --oklch-black: 0 0 0;
+  --muted: #bdbdbd;
   --neutral-0: #ffffff;
   --neutral-2: #f6f6f8;
   --neutral-3: #ededf0;
@@ -44,6 +47,7 @@
   --color-background: var(--color-white);
   --color-foreground: var(--color-text-2);
   --color-outline: var(--web-unifi-color-ublue-06);
+  --color-muted: var(--muted);
   --drop-shadow-button: 0 8px 24px oklch(var(--oklch-black) / 0.08);
   --drop-shadow-button-border: 0 0 1px oklch(var(--oklch-black) / 0.06);
   /* TODO: Replace font. */
