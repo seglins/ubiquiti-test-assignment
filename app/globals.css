@@ -2,7 +2,10 @@
 
 :root {
   --container-width: 1440px;
+  --container-padding: 16px;
+  --container-padding-md: 32px;
   --header-height: 50px;
+  --action-bar-height: 60px;
   --oklch-black: 0 0 0;
   --muted: #bdbdbd;
   --neutral-0: #ffffff;
@@ -49,6 +52,7 @@
   --color-muted: var(--muted);
   --drop-shadow-button: 0 8px 24px oklch(var(--oklch-black) / 0.08);
   --drop-shadow-button-border: 0 0 1px oklch(var(--oklch-black) / 0.06);
+  --drop-shadow-dropdown: 0 16px 32px oklch(var(--oklch-black) / 0.2);
   /* TODO: Replace font. */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -61,10 +65,10 @@
 }
 
 @utility container {
-  @apply px-4 mx-auto max-w-[var(--container-width)];
+  @apply px-[var(--container-padding)] max-w-[var(--container-width)] mx-auto;
 
   @variant md {
-    @apply px-8;
+    @apply px-[var(--container-padding-md)];
   }
 }
 
