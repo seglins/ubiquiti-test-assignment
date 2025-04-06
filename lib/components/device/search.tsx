@@ -10,9 +10,10 @@ import useUrls from "@/lib/hooks/urls";
 
 interface DeviceSearchProps {
   devices: Device[];
+  className?: string;
 }
 
-const DeviceSearch = ({ devices }: DeviceSearchProps) => {
+const DeviceSearch = ({ devices, className }: DeviceSearchProps) => {
   const params = useSearchParams();
   const [query, setQuery] = useState(params.get("search") ?? "");
   const [results, setResults] = useState<Device[]>([]);
@@ -23,10 +24,10 @@ const DeviceSearch = ({ devices }: DeviceSearchProps) => {
   }, [devices, query]);
 
   return (
-    <div className="relative" ref={ref}>
+    <div className={cn("relative", className)} ref={ref}>
       <form
         className={cn(
-          "relative z-[1] flex items-center shrink-0 w-40 sm:w-80 h-8 px-2 rounded-sm",
+          "relative z-[1] flex items-center w-full sm:min-w-80 shrink-0 h-8 px-2 rounded-sm",
           "transition-colors bg-neutral-2 text-neutral-8 hover:bg-neutral-3",
         )}
       >

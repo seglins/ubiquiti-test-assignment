@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import cn from "classnames";
 import { Device } from "@/lib/types";
 import Button from "../ui/button";
 import DeviceTable from "./table";
@@ -16,26 +17,51 @@ interface DeviceListProps {
 const DeviceList = ({ devices }: DeviceListProps) => {
   const [view, setView] = useState<View>("list");
 
+  const actionBarRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const actionBar = actionBarRef.current;
+    if (!actionBar) return;
+
+    const updateHeight = () => {
+      const height = actionBar.offsetHeight;
+      document.documentElement.style.setProperty(
+        "--device-list-action-bar-height",
+        `${height}px`,
+      );
+    };
+
+    updateHeight();
+
+    const observer = new ResizeObserver(() => updateHeight());
+    observer.observe(actionBar);
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <>
-      <section className="sticky top-0 h-[var(--action-bar-height)] inset-x-0 z-50 py-4 bg-background">
-        <div className="container flex justify-between">
-          <div className="flex items-center gap-x-4">
-            <DeviceSearch devices={devices} />
+      <section
+        ref={actionBarRef}
+        className="sticky top-0 inset-x-0 z-50 py-4 bg-background"
+      >
+        <div className="container flex flex-col sm:flex-row justify-between gap-y-2">
+          <div className="flex items-center justify-between gap-x-4 sm:order-2">
+            <DeviceCount count={devices.length} className="sm:hidden" />
 
-            <p className="text-muted text-xs whitespace-nowrap">
-              {devices.length} Devices
-            </p>
+            <div className="flex items-center gap-x-2">
+              <ViewToggle current={view} onClick={setView} />
+              {/* TODO: Filters */}
+            </div>
           </div>
 
-          <div className="flex items-center gap-x-2">
-            <ViewToggle current={view} onClick={setView} />
-            {/* TODO: Filters */}
+          <div className="flex items-center gap-x-4 sm:order-1">
+            <DeviceSearch devices={devices} className="w-full" />
+            <DeviceCount count={devices.length} className="hidden sm:block" />
           </div>
         </div>
       </section>
 
-      <section className="pt-4 h-[calc(100%-var(--action-bar-height))]">
+      <section className="pt-4 h-[calc(100%-var(--device-list-action-bar-height))]">
         {view === "list" && (
           <DeviceTable devices={devices} className="h-full pb-8" />
         )}
@@ -43,6 +69,19 @@ const DeviceList = ({ devices }: DeviceListProps) => {
         {view === "grid" && <DeviceGrid devices={devices} className="pb-8" />}
       </section>
     </>
+  );
+};
+
+interface DeviceCountProps {
+  count: number;
+  className?: string;
+}
+
+const DeviceCount = ({ count, className }: DeviceCountProps) => {
+  return (
+    <p className={cn("text-muted text-xs whitespace-nowrap", className)}>
+      {count} Devices
+    </p>
   );
 };
 
