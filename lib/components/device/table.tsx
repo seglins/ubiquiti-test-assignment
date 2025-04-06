@@ -22,14 +22,14 @@ const DeviceTable = ({ devices, className }: DeviceTableProps) => {
           <DeviceImage
             key={`${device.id}-image`}
             id={device.id}
-            src={device.images.default}
-            alt={device.product.name}
+            src={device.images?.default ?? ""}
+            alt={device.product?.name ?? `Device ${device.id} image`}
             width={20}
             height={20}
           />,
-          device.line.name,
+          device.line?.name,
           <span className="text-text-3" key={`${device.id}-name`}>
-            {device.product.name}
+            {device.product?.name}
           </span>,
         ],
       }))}

@@ -20,13 +20,13 @@ const DeviceGrid = ({ devices, className }: DeviceGridProps) => {
           <DeviceCard
             key={device.id}
             href={`/device/${device.id}`}
-            title={device.product.name}
-            description={device.shortnames.join(", ")}
-            badge={device.line.name}
+            title={device.product?.name ?? ""}
+            description={device.shortnames?.join(", ")}
+            badge={device.line?.name}
             image={{
               id: device.id,
-              src: device.images.default,
-              alt: device.product.name,
+              src: device.images?.default ?? "",
+              alt: device.product?.name ?? `Device ${device.id} photo`,
             }}
           />
         );
