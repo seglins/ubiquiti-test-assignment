@@ -1,5 +1,8 @@
+"use client";
+
 import { Device } from "@/lib/types";
 import Button from "../ui/button";
+import useUrls from "@/lib/hooks/urls";
 
 interface DeviceNavigationProps {
   previousId?: Device["id"];
@@ -7,24 +10,30 @@ interface DeviceNavigationProps {
 }
 
 const DeviceNavigation = ({ previousId, nextId }: DeviceNavigationProps) => {
+  const { getUrlWithSearchParams, getDeviceUrl } = useUrls();
+
+  const backUrl = getUrlWithSearchParams("/");
+  const previousUrl = previousId ? getDeviceUrl(previousId) : undefined;
+  const nextUrl = nextId ? getDeviceUrl(nextId) : undefined;
+
   return (
     <section className="sticky top-0 inset-x-0 z-50 py-4">
       <div className="container flex justify-between">
-        <Button href="/" variant="navigation" icon="chevron-left">
+        <Button href={backUrl} variant="navigation" icon="chevron-left">
           Back
         </Button>
 
         <div className="flex gap-x-1">
           <Button
             disabled={!previousId}
-            href={`/device/${previousId}`}
+            href={previousUrl}
             variant="navigation"
             icon="chevron-left"
           />
 
           <Button
             disabled={!nextId}
-            href={`/device/${nextId}`}
+            href={nextUrl}
             variant="navigation"
             icon="chevron-right"
           />
