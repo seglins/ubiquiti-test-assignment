@@ -17,7 +17,7 @@ const DeviceList = ({ devices }: DeviceListProps) => {
 
   return (
     <>
-      <section className="sticky top-[var(--header-height)]  inset-x-0 z-50 bg-background py-4">
+      <section className="sticky top-0 inset-x-0 z-50 py-4 bg-background">
         <div className="container flex justify-between">
           <div className="flex items-center gap-x-4">
             {/* TODO: Search */}
@@ -32,13 +32,7 @@ const DeviceList = ({ devices }: DeviceListProps) => {
       </section>
 
       <section className="pt-4">
-        {view === "list" && (
-          <DeviceTable
-            devices={devices}
-            className="max-h-[calc(100vh-calc(var(--spacing)*4)-var(--header-height)-var(--action-bar-height))] pb-8"
-          />
-        )}
-
+        {view === "list" && <DeviceTable devices={devices} className="pb-8" />}
         {view === "grid" && <DeviceGrid devices={devices} className="pb-8" />}
       </section>
     </>
