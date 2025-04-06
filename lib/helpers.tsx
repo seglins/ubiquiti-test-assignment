@@ -1,9 +1,5 @@
 import { Device } from "./types";
 
-export const getDeviceUrl = (id: Device["id"]) => {
-  return `/device/${id}`;
-};
-
 export const filterDevicesByName = (devices: Device[], value: string) =>
   devices.filter((device) => {
     const name = device.product?.name?.toLowerCase();
