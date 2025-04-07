@@ -1,3 +1,5 @@
+"use client";
+
 import { Device, DeviceLine } from "@/lib/types";
 import DeviceTable from "./table";
 import DeviceGrid from "./grid";
