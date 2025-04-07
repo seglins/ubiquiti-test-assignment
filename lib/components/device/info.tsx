@@ -39,7 +39,7 @@ const DeviceInfo = ({ device }: DeviceInfoProps) => {
 
           <div className="">
             <DeviceInfoRow
-              label="Product line"
+              label="Product Line"
               value={device.line?.name ?? ""}
             />
             <DeviceInfoRow label="ID" value={device.line?.id ?? ""} />
