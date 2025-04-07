@@ -1,10 +1,17 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
 const useUrls = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
+
+  const updateSearchParam = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(key, value);
+    router.push(`?${params.toString()}`);
+  };
 
   const getUrlWithSearchParams = useCallback(
     (url: string) => {
@@ -19,7 +26,12 @@ const useUrls = () => {
     [getUrlWithSearchParams],
   );
 
-  return { getUrlWithSearchParams, getDeviceUrl };
+  return {
+    searchParams,
+    updateSearchParam,
+    getUrlWithSearchParams,
+    getDeviceUrl,
+  };
 };
 
 export default useUrls;

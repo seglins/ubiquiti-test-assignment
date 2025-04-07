@@ -6,6 +6,11 @@ export const filterDevicesByName = (devices: Device[], value: string) =>
     return name?.includes(value.toLowerCase());
   });
 
+export const filterDevicesByLine = (devices: Device[], values: string[]) =>
+  devices.filter((device) => {
+    return values.includes(device.line?.id ?? "");
+  });
+
 export const highlightPattern = (text: string, pattern: string) => {
   if (!pattern) return text;
 

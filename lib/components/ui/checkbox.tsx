@@ -20,7 +20,7 @@ const Checkbox = ({ label, className, ...props }: CheckboxProps) => {
 
       <span
         className={cn(
-          "inline-flex items-center justify-center size-4 rounded-sm border border-neutral-6 bg-white text-white",
+          "shrink-0 inline-flex items-center justify-center size-4 rounded-sm border border-neutral-6 bg-white text-white",
           "peer-checked:bg-primary-6 peer-checked:border-primary-6",
         )}
       >

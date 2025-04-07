@@ -16,8 +16,6 @@ export const getDevice = async (
   previousId: Device["id"];
   nextId: Device["id"];
 }> => {
-  // Not efficient to fetch all devices in order to get one.
-  // Ideally, the fetch call should be made to a single device endpoint.
   const response = await fetch(url);
   const data = await response.json();
   const devices: Device[] = data.devices ?? [];

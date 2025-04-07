@@ -16,7 +16,7 @@ const DeviceTable = ({ devices, className }: DeviceTableProps) => {
       className={className}
       columns={[
         { title: "", width: "20px" },
-        { title: "Product line", width: "50%" },
+        { title: "Product Line", width: "50%" },
         { title: "Name" },
       ]}
       rows={devices.map((device) => ({
