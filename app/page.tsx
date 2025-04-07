@@ -1,4 +1,5 @@
 import DeviceList from "@/lib/components/device/list";
+import { View } from "@/lib/components/device/list-actions";
 import { filterDevicesByLine, filterDevicesByName } from "@/lib/helpers";
 import { getDevices } from "@/lib/services/device";
 import { Device, DeviceLine } from "@/lib/types";
@@ -10,7 +11,7 @@ export default async function Home({
 }: {
   searchParams: SearchParams;
 }) {
-  const { search, lines } = await searchParams;
+  const { search, lines, view } = await searchParams;
 
   let devices = await getDevices();
 
@@ -34,5 +35,13 @@ export default async function Home({
     devices = filterDevicesByLine(devices, lines.split(","));
   }
 
-  return <DeviceList devices={devices} lines={availableLines} />;
+  const initialView = view && typeof view === "string" ? view : "list";
+
+  return (
+    <DeviceList
+      devices={devices}
+      lines={availableLines}
+      view={initialView as View}
+    />
+  );
 }

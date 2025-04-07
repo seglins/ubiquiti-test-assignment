@@ -1,3 +1,5 @@
+"use client";
+
 import cn from "classnames";
 import { Device } from "@/lib/types";
 import DeviceCard from "./ui/card";

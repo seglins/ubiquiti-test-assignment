@@ -6,6 +6,7 @@ import { Device, DeviceLine } from "@/lib/types";
 import Button from "../ui/button";
 import DeviceSearch from "./search";
 import DeviceLineFilter from "./line-filter";
+import useUrls from "@/lib/hooks/urls";
 
 export type View = "list" | "grid";
 
@@ -13,14 +14,12 @@ interface DeviceListActionsProps {
   devices: Device[];
   lines: DeviceLine[];
   view: View;
-  setView: (view: View) => void;
 }
 
 const DeviceListActions = ({
   devices,
   lines,
   view,
-  setView,
 }: DeviceListActionsProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -55,7 +54,7 @@ const DeviceListActions = ({
             <DeviceCount count={devices.length} className="sm:hidden" />
 
             <div className="flex items-center gap-x-2">
-              <ViewToggle current={view} onClick={setView} />
+              <ViewToggle current={view} />
               <DeviceLineFilter lines={lines} />
             </div>
           </div>
@@ -85,22 +84,24 @@ const DeviceCount = ({ count, className }: DeviceCountProps) => {
 
 interface ViewToggleProps {
   current: View;
-  onClick: (view: View) => void;
 }
 
-const ViewToggle = ({ current, onClick }: ViewToggleProps) => {
+const ViewToggle = ({ current }: ViewToggleProps) => {
+  const param = "view";
+  const { updateSearchParam } = useUrls();
+
   return (
     <div className="flex">
       <Button
         icon="list"
         active={current === "list"}
-        onClick={() => onClick("list")}
+        onClick={() => updateSearchParam(param, "list")}
       />
 
       <Button
         icon="grid"
         active={current === "grid"}
-        onClick={() => onClick("grid")}
+        onClick={() => updateSearchParam(param, "grid")}
       />
     </div>
   );
