@@ -11,7 +11,6 @@ export default async function DevicePage({
   const { device, previousId, nextId } = await getDevice(id);
 
   if (!device) {
-    // TODO: Handle 404
     return null;
   }
 
