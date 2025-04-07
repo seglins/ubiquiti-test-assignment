@@ -1,29 +1,18 @@
-"use client";
-
-import { useState } from "react";
 import { Device, DeviceLine } from "@/lib/types";
 import DeviceTable from "./table";
 import DeviceGrid from "./grid";
-import DeviceListActions from "./list-actions";
-
-type View = "list" | "grid";
+import DeviceListActions, { View } from "./list-actions";
 
 interface DeviceListProps {
   devices: Device[];
   lines: DeviceLine[];
+  view: View;
 }
 
-const DeviceList = ({ devices, lines }: DeviceListProps) => {
-  const [view, setView] = useState<View>("list");
-
+const DeviceList = ({ devices, lines, view }: DeviceListProps) => {
   return (
     <>
-      <DeviceListActions
-        devices={devices}
-        view={view}
-        setView={setView}
-        lines={lines}
-      />
+      <DeviceListActions devices={devices} view={view} lines={lines} />
 
       <section className="pt-4 h-[calc(100%-var(--device-list-action-bar-height))]">
         {view === "list" && (

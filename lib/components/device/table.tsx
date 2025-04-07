@@ -1,3 +1,5 @@
+"use client";
+
 import { Device } from "@/lib/types";
 import Table from "../ui/table";
 import DeviceImage from "./ui/image";
