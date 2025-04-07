@@ -5,8 +5,8 @@ import { Device } from "@/lib/types";
 import Icon from "../ui/icon";
 import { filterDevicesByName, highlightPattern } from "@/lib/helpers";
 import { useSearchParams } from "next/navigation";
-import useDropdown from "@/lib/hooks/dropdown";
 import useUrls from "@/lib/hooks/urls";
+import Popover from "../ui/popover";
 
 interface DeviceSearchProps {
   devices: Device[];
@@ -17,17 +17,17 @@ const DeviceSearch = ({ devices, className }: DeviceSearchProps) => {
   const params = useSearchParams();
   const [query, setQuery] = useState(params.get("search") ?? "");
   const [results, setResults] = useState<Device[]>([]);
-  const { ref, open, show } = useDropdown();
+  const [popoverOpen, setIsPopoverOpen] = useState(false);
 
   useEffect(() => {
     setResults(query.length > 0 ? filterDevicesByName(devices, query) : []);
   }, [devices, query]);
 
   return (
-    <div className={cn("relative", className)} ref={ref}>
+    <div className={cn("relative", className)}>
       <form
         className={cn(
-          "relative z-[1] flex items-center w-full sm:min-w-80 shrink-0 h-8 px-2 rounded-sm",
+          "relative flex items-center w-full sm:min-w-80 shrink-0 h-8 px-2 rounded-sm",
           "transition-colors bg-neutral-2 text-neutral-8 hover:bg-neutral-3",
         )}
       >
@@ -38,27 +38,27 @@ const DeviceSearch = ({ devices, className }: DeviceSearchProps) => {
           placeholder="Search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          onFocus={show}
+          onFocus={() => setIsPopoverOpen(true)}
           className="absolute inset-0 pl-8 rounded-sm placeholder:text-neutral-8"
         />
       </form>
 
-      {results.length > 0 && open && (
-        <div
-          className={cn(
-            "absolute flex flex-col left-0 top-8 overflow-y-scroll rounded-lg bg-background py-2 drop-shadow-dropdown",
-            "max-h-44 sm:min-w-auto sm:w-80 w-[calc(100vw-var(--container-padding)*2)]",
-          )}
-        >
-          {results.map((device) => (
-            <SearchResultItem
-              key={`search-item-${device.id}`}
-              device={device}
-              query={query}
-            />
-          ))}
-        </div>
-      )}
+      <Popover
+        open={results.length > 0 && popoverOpen}
+        setOpen={setIsPopoverOpen}
+        className={cn(
+          "flex flex-col left-0 top-8 py-2 overflow-y-scroll",
+          "max-h-44 sm:min-w-auto sm:w-80 w-[calc(100vw-var(--container-padding)*2)]",
+        )}
+      >
+        {results.map((device) => (
+          <SearchResultItem
+            key={`search-item-${device.id}`}
+            device={device}
+            query={query}
+          />
+        ))}
+      </Popover>
     </div>
   );
 };
