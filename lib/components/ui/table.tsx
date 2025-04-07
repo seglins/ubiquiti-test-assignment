@@ -24,9 +24,9 @@ const Table = ({ columns, rows, className }: TableProps) => {
   const router = useRouter();
 
   return (
-    <div className={cn("w-full relative overflow-x-auto", className)}>
-      <table className="w-full border-separate border-spacing-0">
-        <thead className="sticky top-0 bg-white/85 backdrop-blur-xs">
+    <div className={cn("relative overflow-x-auto", className)}>
+      <table className="container border-separate border-spacing-0">
+        <thead className="sticky top-0 z-10 bg-white/85 backdrop-blur-xs">
           <tr className="">
             {columns.map(({ title, width }, index) => (
               <th
@@ -56,7 +56,7 @@ const Table = ({ columns, rows, className }: TableProps) => {
                   }
                 }}
                 className={cn(
-                  "group hover:bg-neutral-3 focus-visible:outline-none focus:outline-none",
+                  "group hover:bg-neutral-3 focus-visible:outline-none focus:outline-none transition-colors",
                   { "cursor-pointer": !!href },
                 )}
               >

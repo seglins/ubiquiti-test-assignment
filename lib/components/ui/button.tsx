@@ -23,7 +23,7 @@ const Button = ({
       {...props}
       type={type}
       className={cn(
-        "group inline-flex items-center cursor-pointer rounded-sm focus-outline",
+        "group inline-flex items-center cursor-pointer rounded-sm focus-outline transition-colors",
         variant === "default" && [
           "p-1.5",
           "active:bg-unifi-neutral-1 active:text-primary-6",
