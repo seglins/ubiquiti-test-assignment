@@ -2,7 +2,7 @@ import cn from "classnames";
 import Icon, { type IconName } from "./icon";
 import Link from "next/link";
 
-type ButtonVariant = "default" | "cta" | "navigation";
+type ButtonVariant = "default" | "cta" | "navigation" | "destructive";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -36,7 +36,13 @@ const Button = ({
       "p-1 bg-white text-text-3",
       "filter-[drop-shadow(var(--drop-shadow-button-border))_drop-shadow(var(--drop-shadow-button))]",
     ],
-    disabled && "pointer-events-none opacity-50",
+    variant === "destructive" && [
+      disabled ? "text-destructive-3" : "text-destructive-6",
+    ],
+    disabled && [
+      "pointer-events-none",
+      variant !== "destructive" && "opacity-50",
+    ],
     className,
   );
 
