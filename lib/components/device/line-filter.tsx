@@ -1,42 +1,15 @@
 import Filter from "../ui/filter";
-import { Device, DeviceLine } from "@/lib/types";
-import { filterDevicesByLine } from "@/lib/helpers";
+import { DeviceLine } from "@/lib/types";
 
 interface DeviceLineFilterProps {
-  initialDevices: Device[];
-  onChange: (devices: Device[]) => void;
+  lines: DeviceLine[];
 }
 
-const DeviceLineFilter = ({
-  initialDevices,
-  onChange,
-}: DeviceLineFilterProps) => {
-  const lines = Array.from(
-    initialDevices
-      .reduce((map, device) => {
-        if (device.line && !map.has(device.line.id)) {
-          map.set(device.line.id, device.line);
-        }
-
-        return map;
-      }, new Map<Device["id"], DeviceLine>())
-      .values(),
-  );
-
-  const handleFilter = (values: string[]) => {
-    const filteredDevices =
-      values.length > 0
-        ? filterDevicesByLine(initialDevices, values)
-        : initialDevices;
-
-    onChange(filteredDevices);
-  };
-
+const DeviceLineFilter = ({ lines }: DeviceLineFilterProps) => {
   return (
     <Filter
       name="lines"
       title="Product line"
-      onChange={handleFilter}
       options={lines?.map((line) => ({
         value: line.id,
         label: line.name ?? "",

@@ -1,6 +1,7 @@
 import DeviceList from "@/lib/components/device/list";
 import { filterDevicesByLine, filterDevicesByName } from "@/lib/helpers";
 import { getDevices } from "@/lib/services/device";
+import { Device, DeviceLine } from "@/lib/types";
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
@@ -11,19 +12,27 @@ export default async function Home({
 }) {
   const { search, lines } = await searchParams;
 
-  const devices = await getDevices();
+  let devices = await getDevices();
 
-  let filteredDevices = devices;
+  const availableLines = Array.from(
+    devices
+      .reduce((map, device) => {
+        if (device.line && !map.has(device.line.id)) {
+          map.set(device.line.id, device.line);
+        }
+
+        return map;
+      }, new Map<Device["id"], DeviceLine>())
+      .values(),
+  );
 
   if (search && typeof search === "string") {
-    filteredDevices = filterDevicesByName(filteredDevices, search);
+    devices = filterDevicesByName(devices, search);
   }
 
   if (lines && typeof lines === "string") {
-    filteredDevices = filterDevicesByLine(filteredDevices, lines.split(","));
+    devices = filterDevicesByLine(devices, lines.split(","));
   }
 
-  return (
-    <DeviceList initialDevices={devices} filteredDevices={filteredDevices} />
-  );
+  return <DeviceList devices={devices} lines={availableLines} />;
 }

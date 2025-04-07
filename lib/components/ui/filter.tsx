@@ -15,7 +15,7 @@ interface FilterProps {
   title: string;
   options: FilterOption[];
   children: string;
-  onChange: (values: string[]) => void;
+  onChange?: (values: string[]) => void;
   className?: string;
 }
 
@@ -48,13 +48,13 @@ const Filter = ({
 
     updateSearchParam(name, updatedFilters.join(","));
     setActiveFilters(updatedFilters);
-    onChange(updatedFilters);
+    onChange?.(updatedFilters);
   };
 
   const handleReset = () => {
     updateSearchParam(name, "");
     setActiveFilters([]);
-    onChange([]);
+    onChange?.([]);
   };
 
   return (

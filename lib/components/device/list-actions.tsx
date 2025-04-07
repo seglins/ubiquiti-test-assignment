@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import cn from "classnames";
-import { Device } from "@/lib/types";
+import { Device, DeviceLine } from "@/lib/types";
 import Button from "../ui/button";
 import DeviceSearch from "./search";
 import DeviceLineFilter from "./line-filter";
@@ -11,16 +11,14 @@ export type View = "list" | "grid";
 
 interface DeviceListActionsProps {
   devices: Device[];
-  setDevices: (devices: Device[]) => void;
-  initialDevices: Device[];
+  lines: DeviceLine[];
   view: View;
   setView: (view: View) => void;
 }
 
 const DeviceListActions = ({
   devices,
-  setDevices,
-  initialDevices,
+  lines,
   view,
   setView,
 }: DeviceListActionsProps) => {
@@ -58,10 +56,7 @@ const DeviceListActions = ({
 
             <div className="flex items-center gap-x-2">
               <ViewToggle current={view} onClick={setView} />
-              <DeviceLineFilter
-                initialDevices={initialDevices}
-                onChange={setDevices}
-              />
+              <DeviceLineFilter lines={lines} />
             </div>
           </div>
 
