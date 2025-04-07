@@ -1,4 +1,4 @@
-interface DeviceLine {
+export interface DeviceLine {
   id: string;
   name?: string;
 }
