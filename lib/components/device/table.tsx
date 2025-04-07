@@ -1,6 +1,7 @@
 import { Device } from "@/lib/types";
 import Table from "../ui/table";
 import DeviceImage from "./ui/image";
+import useUrls from "@/lib/hooks/urls";
 
 interface DeviceTableProps {
   devices: Device[];
@@ -8,6 +9,8 @@ interface DeviceTableProps {
 }
 
 const DeviceTable = ({ devices, className }: DeviceTableProps) => {
+  const { getDeviceUrl } = useUrls();
+
   return (
     <Table
       className={className}
@@ -17,7 +20,7 @@ const DeviceTable = ({ devices, className }: DeviceTableProps) => {
         { title: "Name" },
       ]}
       rows={devices.map((device) => ({
-        href: `/device/${device.id}`,
+        href: getDeviceUrl(device.id),
         data: [
           <DeviceImage
             key={`${device.id}-image`}

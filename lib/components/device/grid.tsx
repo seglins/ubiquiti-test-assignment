@@ -1,6 +1,7 @@
 import cn from "classnames";
 import { Device } from "@/lib/types";
 import DeviceCard from "./ui/card";
+import useUrls from "@/lib/hooks/urls";
 
 interface DeviceGridProps {
   devices: Device[];
@@ -8,6 +9,8 @@ interface DeviceGridProps {
 }
 
 const DeviceGrid = ({ devices, className }: DeviceGridProps) => {
+  const { getDeviceUrl } = useUrls();
+
   return (
     <div
       className={cn(
@@ -19,7 +22,7 @@ const DeviceGrid = ({ devices, className }: DeviceGridProps) => {
         return (
           <DeviceCard
             key={device.id}
-            href={`/device/${device.id}`}
+            href={getDeviceUrl(device.id)}
             title={device.product?.name ?? ""}
             description={device.shortnames?.join(", ")}
             badge={device.line?.name}
