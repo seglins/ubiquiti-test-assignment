@@ -31,7 +31,7 @@ const Subheader = ({ children, className, onReady }: SubheaderProps) => {
     observer.observe(container);
 
     return () => observer.disconnect();
-  }, []);
+  }, [onReady]);
 
   return (
     <section
