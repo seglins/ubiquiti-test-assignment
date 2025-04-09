@@ -5,7 +5,6 @@
   --container-padding: 16px;
   --container-padding-md: 32px;
   --header-height: 50px;
-  --device-navigation-height: 60px;
   --oklch-black: 0 0 0;
   --muted: #bdbdbd;
   --neutral-0: #ffffff;
@@ -86,8 +85,4 @@ h4,
 h5,
 h6 {
   @apply text-text-1;
-}
-
-main {
-  -webkit-overflow-scrolling: touch;
 }
