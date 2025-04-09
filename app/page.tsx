@@ -51,7 +51,7 @@ export default async function Home({
       }
       subheaderClassName="bg-white"
     >
-      <DeviceList devices={devices} view={initialView} />
+      <DeviceList devices={devices} view={initialView} className="h-full" />
     </Layout>
   );
 }

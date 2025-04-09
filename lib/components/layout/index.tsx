@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import cn from "classnames";
 import Header from "./header";
 import Subheader from "./subheader";
 
@@ -22,7 +23,12 @@ const Layout = ({ subheader, subheaderClassName, children }: LayoutProps) => {
       </Subheader>
 
       {ready && (
-        <main className="overflow-scroll pt-[calc(var(--header-height)+var(--subheader-height)))] h-dvh">
+        <main
+          className={cn(
+            "relative overflow-scroll h-full",
+            "pt-[calc(var(--header-height)+var(--subheader-height))]",
+          )}
+        >
           {children}
         </main>
       )}
