@@ -27,7 +27,7 @@ const DeviceListActions = ({
     const container = ref.current;
     if (!container) return;
 
-    const updateCSSHeightVariable = () => {
+    const updateHeight = () => {
       const height = container.offsetHeight;
       document.documentElement.style.setProperty(
         "--device-list-action-bar-height",
@@ -35,9 +35,9 @@ const DeviceListActions = ({
       );
     };
 
-    updateCSSHeightVariable();
+    updateHeight();
 
-    const observer = new ResizeObserver(() => updateCSSHeightVariable());
+    const observer = new ResizeObserver(() => updateHeight());
     observer.observe(container);
 
     return () => observer.disconnect();

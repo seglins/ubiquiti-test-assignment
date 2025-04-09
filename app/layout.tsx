@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import cn from "classnames";
 import "./globals.css";
 import Header from "@/lib/components/layout/header";
 
@@ -30,13 +29,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}
       >
         <Header />
-        <main
-          className={cn(
-            "overflow-scroll",
-            "h-[calc(100vh-var(--header-height))]",
-            "h-[calc(100dvh-var(--header-height))]",
-          )}
-        >
+        <main className="relative h-[calc(100vh-var(--header-height))] overflow-scroll">
           {children}
         </main>
       </body>
