@@ -1,5 +1,6 @@
 import DeviceList from "@/lib/components/device/list";
-import { View } from "@/lib/components/device/list-actions";
+import DeviceListActions, { View } from "@/lib/components/device/list-actions";
+import Layout from "@/lib/components/layout";
 import { filterDevicesByLine, filterDevicesByName } from "@/lib/helpers";
 import { getDevices } from "@/lib/services/device";
 import { Device, DeviceLine } from "@/lib/types";
@@ -35,13 +36,22 @@ export default async function Home({
     devices = filterDevicesByLine(devices, lines.split(","));
   }
 
-  const initialView = view && typeof view === "string" ? view : "list";
+  const initialView = (
+    view && typeof view === "string" ? view : "list"
+  ) as View;
 
   return (
-    <DeviceList
-      devices={devices}
-      lines={availableLines}
-      view={initialView as View}
-    />
+    <Layout
+      subheader={
+        <DeviceListActions
+          devices={devices}
+          view={initialView}
+          lines={availableLines}
+        />
+      }
+      subheaderClassName="bg-white"
+    >
+      <DeviceList devices={devices} view={initialView} />
+    </Layout>
   );
 }

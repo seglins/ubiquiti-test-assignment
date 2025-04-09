@@ -17,29 +17,27 @@ const DeviceNavigation = ({ previousId, nextId }: DeviceNavigationProps) => {
   const nextUrl = nextId ? getDeviceUrl(nextId) : undefined;
 
   return (
-    <section className="sticky top-0 inset-x-0 z-50 py-4">
-      <div className="container flex justify-between">
-        <Button href={backUrl} variant="navigation" icon="chevron-left">
-          Back
-        </Button>
+    <div className="container flex justify-between py-4">
+      <Button href={backUrl} variant="navigation" icon="chevron-left">
+        Back
+      </Button>
 
-        <div className="flex gap-x-1">
-          <Button
-            disabled={!previousId}
-            href={previousUrl}
-            variant="navigation"
-            icon="chevron-left"
-          />
+      <div className="flex gap-x-1">
+        <Button
+          disabled={!previousId}
+          href={previousUrl}
+          variant="navigation"
+          icon="chevron-left"
+        />
 
-          <Button
-            disabled={!nextId}
-            href={nextUrl}
-            variant="navigation"
-            icon="chevron-right"
-          />
-        </div>
+        <Button
+          disabled={!nextId}
+          href={nextUrl}
+          variant="navigation"
+          icon="chevron-right"
+        />
       </div>
-    </section>
+    </div>
   );
 };
 

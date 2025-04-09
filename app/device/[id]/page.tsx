@@ -1,5 +1,6 @@
 import DeviceNavigation from "@/lib/components/device/navigation";
 import DeviceInfo from "@/lib/components/device/info";
+import Layout from "@/lib/components/layout";
 import { getDevice } from "@/lib/services/device";
 
 export default async function DevicePage({
@@ -15,9 +16,10 @@ export default async function DevicePage({
   }
 
   return (
-    <>
-      <DeviceNavigation previousId={previousId} nextId={nextId} />
+    <Layout
+      subheader={<DeviceNavigation previousId={previousId} nextId={nextId} />}
+    >
       <DeviceInfo device={device} />
-    </>
+    </Layout>
   );
 }
